@@ -1,3 +1,5 @@
+// Environment variables
+// Using Credentials in Jenkinsfile
 pipeline {
     agent any
     environment {

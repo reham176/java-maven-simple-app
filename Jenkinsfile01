@@ -1,3 +1,4 @@
+// execute logic after stages  //add conditions to run stages
 CODE_CHANGES = getCodeChanges()   
 pipeline {
     agent any
