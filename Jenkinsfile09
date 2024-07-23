@@ -38,14 +38,14 @@ pipeline {
                 message "Select the environment to deploy"
                 ok "okay" // confirm button text
                 parameters {
-                    choice(name: 'ENV_01', choices: ['DEV', 'STAGING', 'PROD'], description: 'Pick environment to deploy')
-                    choice(name: 'ENV_02', choices: ['DEV', 'STAGING', 'PROD'], description: 'Pick environment to deploy')
+                    choice(name: 'ENV01', choices: ['DEV', 'STAGING', 'PROD'], description: 'Pick environment to deploy')
+                    choice(name: 'ENV02', choices: ['DEV', 'STAGING', 'PROD'], description: 'Pick environment to deploy')
                 }
             }
             steps {
                 script {
                     groovyFile.deployApp()
-                    echo "Deploying version ${params.VERSION} to ${ENV_01} and ${ENV_02}"
+                    echo "Deploying version ${params.VERSION} to ${ENV01} and ${ENV02}"
 
                 }
             }
