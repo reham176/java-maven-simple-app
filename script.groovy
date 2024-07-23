@@ -2,7 +2,7 @@ def buildApp() {
     echo 'Building the application ...'
 }
 
-def testAPP() {
+def testApp() {
     echo 'Testing the application ...'
 }
 
