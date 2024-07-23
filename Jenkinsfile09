@@ -44,8 +44,10 @@ pipeline {
             }
             steps {
                 script {
+                    env.ENV = input message: "Select the environment to deploy", ok : "okay", parameters: [choice(name: 'ENV_03', choices: ['DEV', 'STAGING', 'PROD'], description: 'Pick environment to deploy')]
+                    // this ENV global variable is accessable to all stages
                     groovyFile.deployApp()
-                    echo "Deploying version ${params.VERSION} to ${ENV01} and ${ENV02}"
+                    echo "Deploying version ${params.VERSION} to ${ENV01} and ${ENV}"
 
                 }
             }
