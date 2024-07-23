@@ -1,0 +1,54 @@
+// using external groovy scripts
+def groovyFile
+pipeline {
+    agent any
+    parameters {
+        choice(name: 'VERSION', choices: ['1.0.0', '1.0.1', '1.0.2'], description: 'choice a specific version')
+        booleanParam(name: 'executeTests', defaultValue: true, description: 'execute/skip test stage')
+    }
+    stages {
+        stage('init') {
+            steps {
+                script {
+                    groovyFile = load 'script.groovy'
+                }
+            }
+        }
+        stage('build') {
+            steps {
+                script {
+                    groovyFile.buildApp()
+                }
+            }
+        }
+        stage('test') {
+            when {
+                expression {
+                    params.executeTests == true //no need to use == true   //you can also use !params.executeTests
+                }
+            }
+            steps {
+                script {
+                    groovyFile.testApp()
+                }
+            }
+        }
+        stage('deploy') {
+            input {
+                message "Select the environment to deploy"
+                ok "okay" // confirm button text
+                parameters {
+                    choice(name: 'ENV-01', choices: ['DEV', 'STAGING', 'PROD'], description: 'Pick environment to deploy')
+                    choice(name: 'ENV-02', choices: ['DEV', 'STAGING', 'PROD'], description: 'Pick environment to deploy')
+                }
+            }
+            steps {
+                script {
+                    groovyFile.deployApp()
+                    echo "Deploying version ${params.VERSION} to ${ENV-01}"
+                    echo "Deploying version ${params.VERSION} to ${ENV-02}"
+                }
+            }
+        }        
+    }
+}
