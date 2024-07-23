@@ -1,4 +1,4 @@
-// using external groovy scripts
+// using Input parameter from User and assign it to global variable
 def groovyFile
 pipeline {
     agent any
@@ -34,21 +34,13 @@ pipeline {
             }
         }
         stage('deploy') {
-            input {
-                message "Select the environment to deploy"
-                ok "okay" // confirm button text
-                parameters {
-                    choice(name: 'ENV01', choices: ['DEV', 'STAGING', 'PROD'], description: 'Pick environment to deploy')
-                    choice(name: 'ENV02', choices: ['DEV', 'STAGING', 'PROD'], description: 'Pick environment to deploy')
-                }
             }
             steps {
                 script {
-                    env.ENV = input message: "Select the environment to deploy", ok : "okay", parameters: [choice(name: 'ENV_03', choices: ['DEV', 'STAGING', 'PROD'], description: 'Pick environment to deploy')]
+                    env.ENV = input message: "Select the environment to deploy", ok : "okay", parameters: [choice(name: 'ENV01', choices: ['DEV', 'STAGING', 'PROD'], description: 'Pick environment to deploy')]
                     // this ENV global variable is accessable to all stages
                     groovyFile.deployApp()
-                    echo "Deploying version ${params.VERSION} to ${ENV01} and ${ENV}"
-
+                    echo "Deploying version ${params.VERSION} to ${ENV}"
                 }
             }
         }        

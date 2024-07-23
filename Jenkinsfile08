@@ -1,4 +1,4 @@
-// using external groovy scripts
+// using multi-Input parameter from User
 def groovyFile
 pipeline {
     agent any
