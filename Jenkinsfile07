@@ -36,7 +36,7 @@ pipeline {
         stage('deploy') {
             input {
                 message "Select the environment to deploy"
-                ok "Done"
+                ok "okay"
                 parameters {
                     choice(name: 'ENV', choices: ['DEV', 'STAGING', 'PROD'], description: 'Pick environment to deploy')
                 }
