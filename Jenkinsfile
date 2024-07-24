@@ -1,8 +1,12 @@
 #!/usr/bin/env groovy
 @Library('jenkins-shared-library')
 def gv
+
 pipeline {
     agent any
+    tools {
+        maven 'maven-3.6' //from the tools configartion
+    }
     stages {
         stage("init") {
             steps {
