@@ -1,5 +1,7 @@
 def gv
-
+    tools {
+        maven 'maven-3.6' //from the tools configartion
+    }
 pipeline {
     agent any
     stages {
