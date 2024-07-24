@@ -1,9 +1,10 @@
 def gv
+    
+pipeline {
+    agent any
     tools {
         maven 'maven-3.6' //from the tools configartion
     }
-pipeline {
-    agent any
     stages {
         stage("init") {
             steps {
