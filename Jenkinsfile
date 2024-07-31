@@ -12,7 +12,7 @@ pipeline {
                 groovyfile = load 'script.groovy'
             }
         }
-    
+    }
     stages {
         stage('build') {
             steps {
