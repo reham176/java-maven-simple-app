@@ -1,7 +1,7 @@
 pipeline{
     agent any
     tools{
-        maven 'maven-3.6'
+        maven 'manen-3.6'
     }
     stages{
         stage ('build jar') {
@@ -15,9 +15,10 @@ pipeline{
             steps{
                 echo 'building the image'
                 sh 'docker build -t rehamahmed176/my-app1:jmvn-1.0'
-                sh "echo $PASSWORD docker login -u $USERNAME --password-stdin"
+                sh "echo $PASSWORD | docker login -u $USERNAME --password-stdin"
                 sh 'docker push rehamahmed176/my-app1:jmvn-1.0'
 
+            } 
         }
         stage('deploy app'){
             steps{
@@ -25,9 +26,7 @@ pipeline{
             } 
         }
 
-        }
+        
 
     }
 }
-            
-
