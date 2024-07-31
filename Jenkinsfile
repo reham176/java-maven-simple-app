@@ -29,28 +29,5 @@ pipeline{
 
     }
 }
-            when {
-                expression {
-                    params.executeTests == true //no need to use == true   //you can also use !params.executeTests
-                }
-            }
-            steps {
-                script {
-                    groovyFile.testApp()
-                }
-            }
-        }
-        stage('deploy') {
             
-            steps {
-                script {
-                    env.ENV = input message: "select an Env to deploy the application",ok: "Done", parameters: [choice(name: 'ENV01',  choices: ['DEV', 'stagging', 'prodction'], description: 'pick an first env to deploy the application to it')]
-                    groovyFile.deployApp()
-                    echo "Deploying the version ${params.VERSION} to env ${ENV}" 
-                }
-            }
-        
-        }
-    }
-}
 
