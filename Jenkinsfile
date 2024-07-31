@@ -40,13 +40,14 @@ pipeline {
                 message "select an Env to deploy the application"
                 ok "Okay"
                 parameters {
-                    choice(name: 'ENV', choices: ['DEV', 'stagging', 'prodction'], description: 'pick an env to deploy the application to it')
+                    choice(name: 'ENV01', choices: ['DEV', 'stagging', 'prodction'], description: 'pick an first env to deploy the application to it')
+                    choice(name: 'ENV02', choices: ['DEV', 'stagging', 'prodction'], description: 'pick an second env to deploy the application to it')
                 }
             }
             steps {
                 script {
                     groovyFile.deployApp()
-                    echo "Deploying the version ${params.VERSION} to env ${ENV}" 
+                    echo "Deploying the version ${params.VERSION} to env ${ENV01} and to env ${ENV02} " 
                 }
             }
         
