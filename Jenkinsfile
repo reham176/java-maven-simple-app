@@ -9,15 +9,13 @@ pipeline {
     stages {
         stage('init') {
             steps {
-                groovyFile = load 'script.groovy'
+                groovyfile = load 'script.groovy'
             }
         }
-    }
-    stages {
         stage('build') {
             steps {
                 script {
-                    groovyFile.buildApp()
+                    groovyfile.buildApp()
                 }
             }
         }
@@ -30,14 +28,14 @@ pipeline {
             }
             steps {
                 script {
-                    groovyFile.testApp()
+                    groovyfile.testApp()
                 }
             }
         }
         stage('deploy') {
             steps {
                 script {
-                    groovyFile.deployApp()
+                    groovyfile.deployApp()
                 }
             }
         
