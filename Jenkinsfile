@@ -39,6 +39,7 @@
 //         }
 //     }   
 // }
+def groovyfile
 pipeline {
     agent any
     parameters {
@@ -52,7 +53,7 @@ pipeline {
                 groovyfile = load 'script.groovy'
             }
         }
-    }
+    
     stages {
         stage('build') {
             steps {
@@ -61,7 +62,7 @@ pipeline {
                 }
             }
         }
-    }
+    
         stage('test') {
             when {
                 expression {
@@ -80,5 +81,7 @@ pipeline {
                     groovyfile.deployApp()
                 }
             }
+        
         }
+    }
 }
