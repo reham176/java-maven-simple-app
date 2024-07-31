@@ -1,4 +1,4 @@
-def groovyfile
+def groovyFile
 pipeline {
     agent any
     parameters {
