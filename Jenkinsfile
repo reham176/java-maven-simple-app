@@ -9,7 +9,10 @@ pipeline {
     stages {
         stage('init') {
             steps {
-                groovyFile = load 'script.groovy'
+                script{
+                    groovyFile = load 'script.groovy'
+                }
+                
             }
         }
         stage('build') {
@@ -19,7 +22,7 @@ pipeline {
                 }
             }
         }
-    
+
         stage('test') {
             when {
                 expression {
