@@ -1,7 +1,7 @@
 pipeline{
     agent any
     tools{
-        maven 'manen-3.6'
+        maven 'maven-3.6'
     }
     stages{
         stage ('build jar') {
