@@ -13,8 +13,8 @@ pipeline{
         }
         stage('build image'){
             steps{
-                echo 'building the image'
-                sh 'docker build -t rehamahmed176/my-app1:jmvn-1.0'
+                echo 'building the docker image'
+                sh 'docker build -t rehamahmed176/my-app1:jmvn-1.0 .'
                 sh "echo $PASSWORD | docker login -u $USERNAME --password-stdin"
                 sh 'docker push rehamahmed176/my-app1:jmvn-1.0'
 
