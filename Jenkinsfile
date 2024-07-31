@@ -1,29 +1,34 @@
-def groovyFile
-pipeline {
+pipeline{
     agent any
-    parameters {
-        // string(name: 'VERSION', defaultValue: '1.0.0', description: 'version to deploy')
-        choice(name: 'VERSION', choices: ['1.0.0', '1.0.1', '1.0.2'], description: 'choice a specific version')
-        booleanParam(name: 'executeTests', defaultValue: true, description: 'execute/skip test stage')
+    tools{
+        maven 'manen-3.6'
     }
-    stages {
-        stage('init') {
-            steps {
-                script{
-                    groovyFile = load 'script.groovy'
-                }
-                
+    stages{
+        stage ('build jar') {
+            steps{
+                echo 'building the jar file'
+                sh 'mvn package'
             }
+
         }
-        stage('build') {
-            steps {
-                script {
-                    groovyFile.buildApp()
-                }
-            }
+        stage('build image'){
+            steps{
+                echo 'building the image'
+                sh 'docker build -t rehamahmed176/my-app1:jmvn-1.0'
+                sh "echo $PASSWORD docker login -u $USERNAME --password-stdin"
+                sh 'docker push rehamahmed176/my-app1:jmvn-1.0'
+
+        }
+        stage('deploy app'){
+            steps{
+                echo 'deploying the application....' 
+            } 
         }
 
-        stage('test') {
+        }
+
+    }
+}
             when {
                 expression {
                     params.executeTests == true //no need to use == true   //you can also use !params.executeTests
